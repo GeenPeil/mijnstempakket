@@ -20,7 +20,7 @@ $parties = array(
     "Vrijzinnige Partij",
   20 => "Piratenpartij",
     "Artikel 1",
-    "Niet Stemers",
+    "Niet Stemmers",
     "LP",
     "Lokaal in de Kamer",
     "JEZUS LEEFT",
@@ -29,19 +29,19 @@ $parties = array(
     "VDP");
 
 $themes = array(
-  "Zorg",
-  "Europese Unie",
-  "Veiligheid",
-  "Migratie",
+  "Binnenlandse Zaken",
+  "Buitenlandse Zaken",
+  "Cultuur",
   "Defensie",
-  "Financi&euml;n",
   "Economische Zaken",
+  "Europese Unie",
+  "Financiën",
   "Infrastructuur",
+  "Migratie",
   "Milieu",
   "Onderwijs",
-  "Cultuur",
   "Sociale Zaken",
   "Sport",
-  "Binnenlandse Zaken",
-  "Buitenlandse Zaken");
+  "Veiligheid",
+  "Zorg");
 ?>
