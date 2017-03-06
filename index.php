@@ -101,8 +101,9 @@ include('pdata.php');
                   <form id="vttx" action="stempakket.jpg" method="POST">
                     <table id="vt"><tr><td><p>Formulier laden...</p></td></tr></table>
                     <div style="display:none;" id="x0"><p><i>en voor alle andere thema's </i></p>
-                      <select name="x0" onChange="ln(0);" style="width:35%;height:40px;"><option value="0">stem ik zelf</option>
+                      <select name="x0" onChange="ln(0);" style="width:35%;height:40px;">
                       <option value="-1">- maak een keuze -</option><option value="0">Ik stem zelf</option>
+                      <option value="0">stem ik zelf</option>
                       <?php
                       foreach($parties as $listno => $party)
                       {
