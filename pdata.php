@@ -29,7 +29,7 @@ $parties = array(
     "VDP");
 
 $themes = array(
-  "Binnenlandse Zaken",
+  1 => "Binnenlandse Zaken",
   "Buitenlandse Zaken",
   "Cultuur",
   "Defensie",
