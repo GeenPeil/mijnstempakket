@@ -35,6 +35,7 @@ include('pdata.php');
         {
           document.getElementById('sbi').style.display = "inline";
           document.getElementById('genimg').src = "stempakket.jpg?"+encodeURI(window.btoa($('#vttx').serialize()));
+          gen_social_buttons();
         }
       }
       
@@ -63,6 +64,7 @@ include('pdata.php');
         document.getElementById('sbi').style.display = "inline";
         document.getElementById('genimg').src = "stempakket.jpg";
         document.getElementById('vttx').style.display = "none";
+        gen_social_buttons();
       }
       else
       {
@@ -70,6 +72,11 @@ include('pdata.php');
         document.getElementById('sbi').style.display = "none";
         ln(0);
       }
+    }
+
+    function gen_social_buttons() {
+      document.getElementById('soc_tw').href = 'https://twitter.com/intent/tweet/?text='+encodeURI('Zo ziet mijn stempakket eruit: '+document.getElementById('genimg').src+' Stel je eigen stempakket samen op https://mijnstempakket.nl/');
+
     }
     
     </script>
@@ -107,9 +114,6 @@ include('pdata.php');
                 
                 </header>
                 <div class="page__content">
-                  <div class="addthis_toolbox addthis_default_style" addthis:url='http://mijnstempakket.nl/' addthis:title='Mijn stempakket'>
-                    <a class="addthis_button_facebook_like"></a><a class="addthis_button_tweet"></a>
-                  </div>
                    <h3>Mijn politiek pakket</h3><br />
                   <p style="text-align: left; line-height: 140%; font-size: medium;"><input type="checkbox" id="cc" onChange="cB();"> Ik wil op alle onderwerpen zelf stemmen</p>
                   <form id="vttx" action="stempakket.jpg" method="POST">
@@ -137,13 +141,17 @@ include('pdata.php');
                   <h3>Jouw stempakket</h3>
                   <img id="genimg">
                 </div>
+                <div class="social">
+                  <h4>Delen mag, het is gratis:</h4>
+                  <a href="http://www.facebook.com/sharer.php?u=https%3A%2F%2Fmijnstempakket.nl%2F&t=Stel%20je%20eigen%20stempakket%20samen." target="_blank" id="soc_fb"><img src="icon-facebook.png" alt="Deel jouw stempakket op Facebook!" width="64" height="64" /></a>
+                  <a href="https://twitter.com/intent/tweet/?text=Stel%20je%20eigen%20stempakket%20samen%3A%20https%3A%2F%2Fmijnstempakket.nl%2F" target="_blank" id="soc_tw"><img src="icon-twitter.png" alt="Deel jouw stempakket op Twitter!" width="64" height="64" /></a>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
     </main>
-    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-58bd353b234f4b1c"></script> 
     <script type="text/javascript">
       var _paq = _paq || [];
       _paq.push(['trackPageView']);
