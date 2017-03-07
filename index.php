@@ -64,8 +64,8 @@ include('pdata.php');
         (document.getElementById('select_keuze_0').value > 0 && document.getElementById('select_thema_0').value >= 0) ||
         document.getElementById('select_keuze_overig').value >= 0
       ) {
-        document.getElementById('sidebar_stempakket').style.display = "inline";
-        document.getElementById('image_stempakket').src = "stempakket.jpg?"+$('#form_keuzes').serialize();
+        // document.getElementById('sidebar_stempakket').style.display = "inline";
+        // document.getElementById('image_stempakket').src = "stempakket.jpg?"+$('#form_keuzes').serialize();
         document.getElementById('anchor_uitslag').href = "uitslag.php?created=yes&"+$('#form_keuzes').serialize();
       }
     }
@@ -146,12 +146,13 @@ include('pdata.php');
               </div>
             </div>
             <div class="large-4 columns sticky-element">
-              <div class="sidebar" id="sidebar_stempakket" style="display:none;">
+                Heb je een vraag over Mijn Stempakket? Kijk of je vraag tussen de <a href="https://geenpeil.nl/standpunten/" target="_blank" >veelgestelde vragen</a> staat.
+              <!-- <div class="sidebar" id="sidebar_stempakket" style="display:none;">
                 <div class="sidebar__item sidebar__item--action-block"  class="shareable-class">
                   <h3>Jouw stempakket</h3>
                   <img id="image_stempakket">
                 </div>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>

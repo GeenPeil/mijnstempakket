@@ -66,6 +66,20 @@ foreach($partijRegels as $key => $value) {
           .header { top: 0px; }
         }
     </style>
+    <?php 
+      $ogDescription = "Elke politieke partij heeft wel standpunten waar je het grondig mee eens bent. Of juist oneens. Daarom kun je bij GeenPeil na de verkiezingen je eigen persoonlijke pakket van politieke standpunten samenstellen. Zo maak je eigenlijk de ideale partij voor jou.";
+    ?>
+    <meta property="og:title" content="Mijn Stempakket" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://mijnstempakket.geenpeil.nl/uitslag.php<?=$checkedURI?>" />
+    <meta property="og:image" content="https://mijnstempakket.geenpeil.nl/stempakket.jpg<?=$checkedURI?>" />
+    <meta property="og:description" content="<?=$ogDescription?>" />
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@GeenPeil">
+    <meta name="twitter:creator" content="@GeenPeil">
+    <meta name="twitter:title" content="Mijn Stempakket">
+    <meta name="twitter:description" content="<?=$ogDescription?>">
+    <meta name="twitter:image" content="ttps://mijnstempakket.geenpeil.nl/stempakket.jpg<?=$checkedURI?>">
   </head>
   <body class="page-template-default page page-id-23">
     <div class="navigation navigation--mobile">
@@ -94,6 +108,9 @@ foreach($partijRegels as $key => $value) {
             <div class="large-4 columns" style="margin-top: 40px;">
               <?php if($_GET['created']=='yes'): ?>
                 <div class="social">
+                  <h4>Jouw Stempakket</h4>
+                  <p>Zo. Voelt dat even goed. Je kunt nu de beste standpunten uit alle partijprogramma's kiezen. Zo creëer je als het ware je eigen, ideale partij. En het mooie eraan is: je kunt deze keuze op elk moment wijzigen. Je zit dus niet langer 4 jaar lang vast aan de stem die je uitbrengt op 15 maart.
+                    Klinkt goed toch? Dat is het ook. <a href="https://geenpeil.nl/standpunten/" target="_blank" >Lees hier hoe het werkt.</a></p>
                   <h4>Delen mag, het is gratis:</h4>
                   <a href="http://www.facebook.com/sharer.php?u=<?=urlencode("https://mijnstempakket.geenpeil.nl/uitslag.php".$checkedURI)?>&t=Stel%20je%20eigen%20stempakket%20samen." target="_blank" id="soc_fb"><img src="icon-facebook.png" alt="Deel jouw stempakket op Facebook!" width="64" height="64" /></a>
                   <a href="https://twitter.com/intent/tweet/?url=<?=urlencode("https://mijnstempakket.geenpeil.nl/uitslag.php".$checkedURI)?>&text=Zo%20ziet%20mijn%20stempakket%20eruit." target="_blank" id="soc_tw"><img src="icon-twitter.png" alt="Deel jouw stempakket op Twitter!" width="64" height="64" /></a>
