@@ -84,24 +84,27 @@ foreach($partijRegels as $key => $value) {
       <section class="container container--content">
         <div class="default-page">
           <div class="row">
-            <div class="large-offset-2 large-8 columns">
-              <div class="post-content" style="text-align: center;">
+            <div class="large-offset-1 large-6 columns">
+              <div class="post-content">
                 <div class="page__content">
                   <img id="image_stempakket" src="stempakket.jpg<?=$checkedURI?>" >
                 </div>
               </div>
+            </div>
+            <div class="large-4 columns" style="margin-top: 40px;">
               <?php if($_GET['created']=='yes'): ?>
-                <div class="social" style="text-align: center;">
+                <div class="social">
                   <h4>Delen mag, het is gratis:</h4>
                   <a href="http://www.facebook.com/sharer.php?u=<?=urlencode("https://mijnstempakket.geenpeil.nl/uitslag.php".$checkedURI)?>&t=Stel%20je%20eigen%20stempakket%20samen." target="_blank" id="soc_fb"><img src="icon-facebook.png" alt="Deel jouw stempakket op Facebook!" width="64" height="64" /></a>
                   <a href="https://twitter.com/intent/tweet/?url=<?=urlencode("https://mijnstempakket.geenpeil.nl/uitslag.php".$checkedURI)?>&text=Zo%20ziet%20mijn%20stempakket%20eruit." target="_blank" id="soc_tw"><img src="icon-twitter.png" alt="Deel jouw stempakket op Twitter!" width="64" height="64" /></a>
                 </div>
               <?php else: ?>
-                <div style="text-align: center;">
+                <div>
                   <a href="/" class="button" >Stel je eigen stempakket samen</a>
                 </div>
               <?php endif; ?>
             </div>
+            <div class="large-1 columns">&nbsp;</div>
           </div>
         </div>
       </section>
