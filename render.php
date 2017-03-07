@@ -18,7 +18,10 @@ $memcache = new Memcache();
 $memcache->connect('localhost', 11211) or die ("Could not connect");
 
 header('Content-type: image/jpeg');
-if($_SERVER['REQUEST_METHOD'] == "GET" && empty($_GET)) {
+if(
+  ($_SERVER['REQUEST_METHOD'] == "GET" && empty($_GET)) ||
+  (count($_GET) == 1 && $_GET['keuze_overig'] == 0)
+) {
   $rd = imagecreatefromjpeg(IMG_ALT_2);
   imagettftext($rd, FONT_SIZE, 0, THEME_START_X, PARTY_O_START_Y, $cBl, $ftB, $p);
   imagejpeg($rd);
