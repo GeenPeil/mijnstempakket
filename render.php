@@ -14,6 +14,9 @@ define('IMG_ALT_1', 'render_o1.jpg');
 define('IMG_ALT_2', 'render_o2.jpg');
 define('TEXT_1', 'Ik stem zelf');
 
+$memcache = new Memcache();
+$memcache->connect('localhost', 11211) or die ("Could not connect");
+
 header('Content-type: image/jpeg');
 if($_SERVER['REQUEST_METHOD'] == "GET" && empty($_GET))
 {
@@ -26,6 +29,16 @@ if($_SERVER['REQUEST_METHOD'] == "GET" && empty($_GET))
 
 include('pdata.php');
 $ip = array();
+
+$image_key = md5(key($_GET));
+if (count($_GET) == 1) {
+  $cache = $memcache->get($image_key);
+  if ($cache) {
+    $image = ImageCreateFromString(base64_decode($cache));
+    ImageJpeg($image);
+    exit();
+  }
+}
 
 if(count($_GET) == 1) parse_str(base64_decode(key($_GET)), $_POST);
 
@@ -105,6 +118,10 @@ foreach($ip as $theme => $party)
  $n++;
 }
 
+ob_start();
 imagejpeg($rd);
+$image = ob_get_clean();
 imagedestroy($rd);
-?> 
+
+memcache_add($memcache, $image_key, base64_encode($image), false, 5);
+echo $image;
