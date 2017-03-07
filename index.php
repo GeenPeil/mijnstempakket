@@ -59,7 +59,9 @@ include('pdata.php');
     
     </script>
     <style>
-        @media screen and (max-width: 63.9375em) .header { top: 0px; }
+        @media screen and (max-width: 63.9375em) {
+          .header { top: 0px; }
+        }
     </style>
   </head>
   <body class="page-template-default page page-id-23" onLoad="loadForm();">

@@ -123,5 +123,5 @@ imagejpeg($rd);
 $image = ob_get_clean();
 imagedestroy($rd);
 
-memcache_add($memcache, $image_key, base64_encode($image), false, 5);
+memcache_add($memcache, $image_key, base64_encode($image), false, 300);
 echo $image;
