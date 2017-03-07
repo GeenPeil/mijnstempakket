@@ -29,7 +29,7 @@ if($_SERVER['REQUEST_METHOD'] == "GET" && empty($_GET)) {
 include('pdata.php');
 $ip = array();
 
-$image_key = md5(http_build_query(ksort($_GET)));
+$image_key = md5(http_build_query($_GET));
 if (count($_GET) == 1) {
   $cachedImage = $memcache->get($image_key);
   if ($cachedImage) {
