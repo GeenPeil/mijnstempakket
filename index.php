@@ -11,7 +11,21 @@ include('pdata.php');
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script type="text/javascript">
     var cur = 0;
-    var voteLine = '<td style="min-width:150px;"><select name="tXID" id="tXID" onChange="ln(XMID);"><option value="-1">- kies een thema -</option><?php foreach($themes as $npo => $theme) echo "<option value=\"".$npo."\">".$theme."</option>";?></select></td><td style="width:20px;"><td><select name="sXID" id="sXID" onChange="ln(XID);"><option value="-1">- maak een keuze -</option><option value="0">Ik stem zelf</option><?php foreach($parties as $listno => $party) echo "  <option value=\"".$listno."\">Meestemmen met ".$party."</option>"; ?></select></td>';
+    
+    var voteLine = ''.
+      '<td style="min-width:150px;">'.
+        '<select name="tXID" id="tXID" onChange="ln(XMID);">'.
+          '<option value="-1">- kies een thema -</option>'.
+          '<?php foreach($themes as $npo => $theme) echo "<option value=\"".$npo."\">".$theme."</option>";?>'.
+        '</select>'.
+      '</td>'.
+      '<td style="width:20px;">'.
+        '<select name="sXID" id="sXID" onChange="ln(XID);">'.
+          '<option value="-1">- maak een keuze -</option>'.
+          '<option value="0">Ik stem zelf</option>'.
+          '<?php foreach($parties as $listno => $party) echo "  <option value=\"".$listno."\">Meestemmen met ".$party."</option>"; ?>'.
+        '</select>'.
+      '</td>';
     function ln(sId)
     {
       if(document.getElementById('t0').value > 0)
@@ -95,25 +109,20 @@ include('pdata.php');
                   <div class="addthis_toolbox addthis_default_style" addthis:url='http://mijnstempakket.nl/' addthis:title='Mijn stempakket'>
                     <a class="addthis_button_facebook_like"></a><a class="addthis_button_tweet"></a>
                   </div>
-                  <!-- <h3 style="text-align: left;">Stel je eigen pakket samen!</h3>
-                  <p style="text-align: left; line-height: 140%; font-size: medium;">Elke politieke partij heeft wel standpunten waar je het grondig mee eens bent. Of juist oneens.</p>
-                  <p style="text-align: left; line-height: 140%; font-size: medium;">Daarom kun je bij GeenPeil na de verkiezingen je eigen persoonlijke pakket van politieke standpunten samenstellen. Je kiest dus het allerbeste van alle partijen!</p>
-                  <p style="text-align: left; line-height: 140%; font-size: medium;">Je vindt bijvoorbeeld dat privacy het veiligst is bij de Piratenpartij, maar veiligheid laat je liever over aan de PVV. Op het gebied van zorg gaat je voorkeur naar de SP. Maar als het op belastingen aankomt, heb je liever geen SP, maar wil je doen wat de VVD doet.</p>
-                  <p style="text-align: left; line-height: 140%; font-size: medium;">Natuurlijk kun je ook altijd zelf per onderwerp stemmen, wanneer je dat wilt en op wat je maar wilt.</p>
-                  <hr /> -->
                    <h3>Mijn politiek pakket</h3><br />
                   <p style="text-align: left; line-height: 140%; font-size: medium;"><input type="checkbox" id="cc" onChange="cB();"> Ik wil op alle onderwerpen zelf stemmen</p>
                   <form id="vttx" action="stempakket.jpg" method="POST">
                     <table id="vt"><tr><td><p>Formulier laden...</p></td></tr></table>
                     <div style="display:none;" id="x0"><p><i>en voor alle andere thema's </i></p>
                       <select name="x0" onChange="ln(0);" style="width:35%;height:40px;">
-                      <option value="-1">- maak een keuze -</option><option value="0">Ik stem zelf</option>
-                      <?php
-                      foreach($parties as $listno => $party)
-                      {
-                        echo "<option value=\"".$listno."\">stem ik mee met ".$party."</option>";
-                      }
-                      ?>
+                        <option value="-1">- maak een keuze -</option>
+                        <option value="0">Ik stem zelf</option>
+                        <?php
+                        foreach($parties as $listno => $party)
+                        {
+                          echo "<option value=\"".$listno."\">stem ik mee met ".$party."</option>";
+                        }
+                        ?>
                       </select>
                     </div>
                   </form>
