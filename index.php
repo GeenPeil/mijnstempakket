@@ -12,20 +12,20 @@ include('pdata.php');
     <script type="text/javascript">
     var cur = 0;
     
-    var voteLine = ''.
-      '<td style="min-width:150px;">'.
-        '<select name="tXID" id="tXID" onChange="ln(XMID);">'.
-          '<option value="-1">- kies een thema -</option>'.
-          '<?php foreach($themes as $npo => $theme) echo "<option value=\"".$npo."\">".$theme."</option>";?>'.
-        '</select>'.
-      '</td>'.
-      '<td style="width:20px;">'.
-        '<select name="sXID" id="sXID" onChange="ln(XID);">'.
-          '<option value="-1">- maak een keuze -</option>'.
-          '<option value="0">Ik stem zelf</option>'.
-          '<?php foreach($parties as $listno => $party) echo "  <option value=\"".$listno."\">Meestemmen met ".$party."</option>"; ?>'.
-        '</select>'.
-      '</td>';
+    var voteLine = [
+      '<td style="min-width:150px;">',
+        '<select name="tXID" id="tXID" onChange="ln(XMID);">',
+          '<option value="-1">- kies een thema -</option>',
+          '<?php foreach($themes as $npo => $theme) echo "<option value=\"".$npo."\">".$theme."</option>";?>',
+        '</select>',
+      '</td>',
+      '<td style="width:20px;">',
+        '<select name="sXID" id="sXID" onChange="ln(XID);">',
+          '<option value="-1">- maak een keuze -</option>',
+          '<option value="0">Ik stem zelf</option>',
+          '<?php foreach($parties as $listno => $party) echo "  <option value=\"".$listno."\">Meestemmen met ".$party."</option>"; ?>',
+        '</select>',
+      '</td>'].join('\n');
     function ln(sId)
     {
       if(document.getElementById('t0').value > 0)
