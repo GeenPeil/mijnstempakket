@@ -1,0 +1,12 @@
+
+localhost {
+	log / stdout "{combined}"
+	errors visible
+	
+	rewrite {
+		regexp ^/stempakket\.jpg\?(.*)$
+		to /render.php?{1}
+	}
+	
+	fastcgi / localhost:9000 php
+}

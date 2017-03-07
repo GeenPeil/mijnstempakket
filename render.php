@@ -40,24 +40,33 @@ if (count($_GET) == 1) {
   }
 }
 
-if(count($_GET) == 1) parse_str(base64_decode(key($_GET)), $_POST);
+foreach($_GET as $key => $value) {
+  if (
+    substr($key, 0, 6) != "thema_" || 
+    $value < 0
+  ) {
+    continue;
+  }
 
-foreach($_POST as $key => $value) {
-  if($value < 0) continue;
+  $id = explode("_", $key)[1];
+  if (
+    !is_numeric($id) ||
+    !isset($_GET['keuze_'.$id]) ||
+    !is_numeric($_GET['keuze_'.$id]) || 
+    $_GET['keuze_'.$id] < 0
+  ) {
+    continue;
+  }
   
-  $sz = false;
-  $type = substr($key,0,1); $no = substr($key,1);
-  
-  if(!is_numeric($no)) continue;
-  if(!isset($_POST['s'.$no])) continue;
-  if(!is_numeric($_POST['s'.$no])) continue;
-  if(!$_POST['s'.$no]) $sz = true;
-  if($_POST['s'.$no] < 0) continue;
-  
-  if($type == "t") $ip[$themes[$_POST['t'.$no]]] = ($sz ? TEXT_1 : $parties[$_POST['s'.$no]]);
+  $zelfStemmen = false;
+  if($_GET['keuze_'.$id] == 0) {
+    $zelfStemmen = true;
+  }
+
+  $ip[$themes[$_GET['thema_'.$id]]] = ($zelfStemmen ? TEXT_1 : $parties[$_GET['keuze_'.$id]]);
 }
 
-if(isset($_POST['x0']) && $_POST['x0'] != 0) $ip[0] = $parties[$_POST['x0']];
+if(isset($_GET['keuze_overig']) && $_GET['keuze_overig'] != 0) $ip[0] = $parties[$_GET['keuze_overig']];
 
 $p = "";
 $a = 1;
@@ -118,6 +127,7 @@ foreach($ip as $theme => $party)
  $n++;
 }
 
+header('Content-type: image/jpeg');
 ob_start();
 imagejpeg($rd);
 $image = ob_get_clean();

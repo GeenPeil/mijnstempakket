@@ -10,66 +10,74 @@ include('pdata.php');
     <link rel='stylesheet' id='stylesheet-css'  href='https://geenpeil.nl/wp-content/themes/geenpeil/style.css?ver=49' type='text/css' media='' />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script type="text/javascript">
-    var cur = 0;
+    var aantalCombinaties = 0;
     
     var voteLine = [
       '<td style="min-width:150px;">',
-        '<select name="tXID" id="tXID" onChange="ln(XMID);">',
+        '<select name="thema_{{ID}}" id="select_thema_{{ID}}" onChange="keuzeCombinatieUpdate({{ID}});">',
           '<option value="-1">- kies een thema -</option>',
-          '<?php foreach($themes as $npo => $theme) echo "<option value=\"".$npo."\">".$theme."</option>";?>',
+          '<?php foreach($themes as $themeID => $theme) echo "<option value=\"".$themeID."\">".$theme."</option>";?>',
         '</select>',
       '</td>',
       '<td style="width:20px;"></td>',
       '<td>',
-        '<select name="sXID" id="sXID" onChange="ln(XID);">',
+        '<select name="keuze_{{ID}}" id="select_keuze_{{ID}}" onChange="keuzeCombinatieUpdate({{ID}});">',
           '<option value="-1">- maak een keuze -</option>',
           '<option value="0">Ik stem zelf</option>',
-          '<?php foreach($parties as $listno => $party) echo "  <option value=\"".$listno."\">Meestemmen met ".$party."</option>"; ?>',
+          '<?php foreach($parties as $partyID => $party) echo "  <option value=\"".$partyID."\">Meestemmen met ".$party."</option>"; ?>',
         '</select>',
       '</td>'].join('\n');
-    function ln(sId)
-    {
-      if(document.getElementById('t0').value > 0)
-      {
-        if(document.getElementById('s0').value >= 0)
-        {
-          document.getElementById('sbi').style.display = "inline";
-          document.getElementById('genimg').src = "stempakket.jpg?"+encodeURI(window.btoa($('#vttx').serialize()));
-          gen_social_buttons();
-        }
+
+    function loadForm() {
+      document.getElementById('table_keuze_combinaties').deleteRow(0);
+      addKeuzeCombinatie(0);
+      document.getElementById('keuze_overig').style.display = "inline";
+    }
+    
+    function addKeuzeCombinatie(id) {
+      row = document.getElementById('table_keuze_combinaties').insertRow();
+      row.innerHTML = voteLine.replace(/\{\{ID\}\}/g, id);
+    }
+      
+    function keuzeCombinatieUpdate(combiatieID) {
+      updateImage();
+      
+      if(combiatieID < aantalCombinaties) {
+          return; // fast path
+      }
+      if(aantalCombinaties > 6) { // max 7 combinaties?
+          return;
       }
       
-      if(sId < cur) return;
-      if(cur > 6) return;
-      cur+=1;
-      
-      row = document.getElementById('vt').insertRow();
-      row.innerHTML = voteLine.replace(/XID/g, cur).replace("XMID", (cur - 1));
-      
-      if(cur == 1)
-        document.getElementById('x0').style.display = "inline";
+      if (document.getElementById('select_keuze_'+aantalCombinaties).value > 0 && document.getElementById('select_thema_'+aantalCombinaties).value >= 0) {
+        aantalCombinaties += 1;
+        addKeuzeCombinatie(aantalCombinaties);
+      }
     }
     
-    function loadForm()
-    {
-      document.getElementById('vt').deleteRow(0);
-      row = document.getElementById('vt').insertRow();
-      row.innerHTML = voteLine.replace(/XID/g, 0).replace("XMID", (cur - 1));
+    function keuzeOverigeUpdate() {
+      updateImage();
     }
     
-    function cB()
-    {
-      if(document.getElementById('cc').checked)
-      {
-        document.getElementById('sbi').style.display = "inline";
-        document.getElementById('genimg').src = "stempakket.jpg";
-        document.getElementById('vttx').style.display = "none";
+    function updateImage() {
+      if (
+        (document.getElementById('select_keuze_0').value > 0 && document.getElementById('select_thema_0').value >= 0) ||
+        document.getElementById('select_keuze_overig').value >= 0
+      ) {
+        document.getElementById('sidebar_stempakket').style.display = "inline";
+        document.getElementById('image_stempakket').src = "render.php?"+$('#form_keuzes').serialize();
         gen_social_buttons();
       }
-      else
-      {
-        document.getElementById('vttx').style.display = "inline";
-        document.getElementById('sbi').style.display = "none";
+    }
+    
+    function zelfKiezenUpdate() {
+      if(document.getElementById('checkbox_zelf_alles_kiezen').checked) {
+        document.getElementById('form_keuzes').style.display = "none";
+        document.getElementById('sidebar_stempakket').style.display = "inline";
+        document.getElementById('image_stempakket').src = "stempakket.jpg";
+      } else {
+        document.getElementById('form_keuzes').style.display = "inline";
+        document.getElementById('sidebar_stempakket').style.display = "none";
         ln(0);
       }
     }
@@ -115,17 +123,21 @@ include('pdata.php');
                 </header>
                 <div class="page__content">
                    <h3>Mijn politiek pakket</h3><br />
-                  <p style="text-align: left; line-height: 140%; font-size: medium;"><input type="checkbox" id="cc" onChange="cB();"> Ik wil op alle onderwerpen zelf stemmen</p>
-                  <form id="vttx" action="stempakket.jpg" method="POST">
-                    <table id="vt"><tr><td><p>Formulier laden...</p></td></tr></table>
-                    <div style="display:none;" id="x0"><p><i>en voor alle andere thema's </i></p>
-                      <select name="x0" onChange="ln(0);" style="width:35%;height:40px;">
+                  <p style="text-align: left; line-height: 140%; font-size: medium;">
+                    <input type="checkbox" id="checkbox_zelf_alles_kiezen" onChange="zelfKiezenUpdate();">
+                    <label for="checkbox_zelf_alles_kiezen" >Ik wil op alle onderwerpen zelf stemmen</label>
+                  </p>
+                  <form id="form_keuzes" action="stempakket.jpg" method="POST">
+                    <table id="table_keuze_combinaties"><tr><td><p>Formulier laden...</p></td></tr></table>
+                    <div style="display:none;" id="keuze_overig">
+                      <p><i>en voor alle andere thema's </i></p>
+                      <select name="keuze_overig" id="select_keuze_overig" onChange="keuzeOverigeUpdate();" style="width:35%;height:40px;">
                         <option value="-1">- maak een keuze -</option>
                         <option value="0">Ik stem zelf</option>
                         <?php
-                        foreach($parties as $listno => $party)
+                        foreach($parties as $partyID => $party)
                         {
-                          echo "<option value=\"".$listno."\">stem ik mee met ".$party."</option>";
+                          echo "<option value=\"".$partyID."\">stem ik mee met ".$party."</option>";
                         }
                         ?>
                       </select>
@@ -136,10 +148,10 @@ include('pdata.php');
               </div>
             </div>
             <div class="large-4 columns sticky-element">
-              <div class="sidebar" id="sbi" style="display:none;">
+              <div class="sidebar" id="sidebar_stempakket" style="display:none;">
                 <div class="sidebar__item sidebar__item--action-block"  class="shareable-class">
                   <h3>Jouw stempakket</h3>
-                  <img id="genimg">
+                  <img id="image_stempakket">
                 </div>
                 <div class="social">
                   <h4>Delen mag, het is gratis:</h4>
