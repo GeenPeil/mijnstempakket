@@ -43,10 +43,10 @@ include('pdata.php');
       updateImage();
       
       if(combiatieID < aantalCombinaties) {
-          return; // fast path
+        return; // fast path
       }
       if(aantalCombinaties > 6) { // max 7 combinaties?
-          return;
+        return;
       }
       
       if (document.getElementById('select_keuze_'+aantalCombinaties).value > 0 && document.getElementById('select_thema_'+aantalCombinaties).value >= 0) {
@@ -83,7 +83,7 @@ include('pdata.php');
     }
 
     function gen_social_buttons() {
-      document.getElementById('soc_tw').href = 'https://twitter.com/intent/tweet/?text='+encodeURI('Zo ziet mijn stempakket eruit: '+document.getElementById('genimg').src+' Stel je eigen stempakket samen op https://mijnstempakket.nl/');
+      document.getElementById('soc_tw').href = 'https://twitter.com/intent/tweet/?text='+encodeURI('Zo ziet mijn stempakket eruit: '+document.getElementById('image_stempakket').src+' Stel je eigen stempakket samen op https://mijnstempakket.nl/');
 
     }
     
