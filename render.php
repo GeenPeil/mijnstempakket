@@ -1,34 +1,12 @@
 <?php
-define('IMG_WIDTH', 1200);
-define('IMG_MIN_HEIGHT', 925);
-define('TEXT_START_Y', 545);
-define('TEXT_SPACING_Y', 108);
-define('THEME_START_X', 113);
-define('PARTY_START_X', 638);
-define('PARTY_O_START_Y', 635);
-define('FONT_SIZE', 29);
-define('MAX_LINES', 6);
-define('IMG_HEAD', 'render_head.jpg');
-define('IMG_FOOT_OVERIG_PARTIJ', 'render_foot_overig_partij.jpg');
-define('IMG_FOOT_OVERIG_ZELF', 'render_foot_overig_zelf.jpg');
-define('IMG_FOOT_OVERIG_HEIGHT', 582);
-define('IMG_FOOT_CLEAN', 'render_foot_clean.jpg');
-define('IMG_FOOT_CLEAN_HEIGHT', 348);
-define('IMG_EEN_PARTIJ', 'render_een_partij.jpg');
-define('IMG_ZELF_STEMMEN', 'render_zelf_stemmen.jpg');
-define('TEXT_STEM_ZELF', 'Ik stem zelf');
-
-$font_light = dirname(__FILE__) . '/helvetica.ttf';
-$font_bold = dirname(__FILE__). '/helvetica-bold.ttf';
+include('pdata.php');
 
 $memcache = new Memcache();
 $memcache->connect('localhost', 11211) or die ("Could not connect");
 
 header('Content-type: image/jpeg');
 
-include('pdata.php');
 $partijRegels = array();
-
 foreach($_GET as $key => $value) {
   if (
     substr($key, 0, 6) != "thema_" || 
@@ -46,7 +24,7 @@ foreach($_GET as $key => $value) {
   ) {
     continue;
   }
-  
+
   $zelfStemmen = false;
   if($_GET['keuze_'.$id] == 0) {
     $zelfStemmen = true;
@@ -62,7 +40,6 @@ if(isset($_GET['keuze_overig']) && $_GET['keuze_overig'] != 0) {
 if($_GET['keuze_overig'] == 0) {
   $partijRegels['overig'] = 'self';
 }
-
 
 // Show cached image if it exists
 $image_key = md5(http_build_query($partijRegels));
@@ -108,7 +85,7 @@ if (isset($partijRegels['overig'])) {
   $numPartijRegels--;
 }
 
-$rdH = IMG_MIN_HEIGHT+max($numPartijRegels, MAX_LINES)*TEXT_SPACING_Y+(isset($partijRegels['overig']) ? IMG_FOOT_OVERIG_HEIGHT-IMG_FOOT_CLEAN_HEIGHT : 0);
+$rdH = IMG_MIN_HEIGHT+min($numPartijRegels, MAX_LINES)*TEXT_SPACING_Y+(isset($partijRegels['overig']) ? IMG_FOOT_OVERIG_HEIGHT-IMG_FOOT_CLEAN_HEIGHT : 0);
 
 $rd = imagecreatetruecolor(IMG_WIDTH, $rdH);
 $colorBlack = imagecolorallocate($rd, 0, 0, 0);

@@ -38,7 +38,7 @@ include('pdata.php');
       row = document.getElementById('table_keuze_combinaties').insertRow();
       row.innerHTML = voteLine.replace(/\{\{ID\}\}/g, id);
     }
-      
+
     function keuzeCombinatieUpdate(combiatieID) {
       updateImage();
       
@@ -48,17 +48,17 @@ include('pdata.php');
       if(aantalCombinaties > 6) { // max 7 combinaties?
         return;
       }
-      
+
       if (document.getElementById('select_keuze_'+aantalCombinaties).value > 0 && document.getElementById('select_thema_'+aantalCombinaties).value >= 0) {
         aantalCombinaties += 1;
         addKeuzeCombinatie(aantalCombinaties);
       }
     }
-    
+
     function keuzeOverigeUpdate() {
       updateImage();
     }
-    
+
     function updateImage() {
       if (
         (document.getElementById('select_keuze_0').value > 0 && document.getElementById('select_thema_0').value >= 0) ||
@@ -66,10 +66,10 @@ include('pdata.php');
       ) {
         document.getElementById('sidebar_stempakket').style.display = "inline";
         document.getElementById('image_stempakket').src = "stempakket.jpg?"+$('#form_keuzes').serialize();
-        gen_social_buttons();
+        document.getElementById('anchor_uitslag').href = "uitslag.php?created=yes&"+$('#form_keuzes').serialize();
       }
     }
-    
+
     function zelfKiezenUpdate() {
       if(document.getElementById('checkbox_zelf_alles_kiezen').checked) {
         document.getElementById('form_keuzes').style.display = "none";
@@ -82,11 +82,6 @@ include('pdata.php');
       }
     }
 
-    function gen_social_buttons() {
-      document.getElementById('soc_tw').href = 'https://twitter.com/intent/tweet/?text='+encodeURI('Zo ziet mijn stempakket eruit: '+document.getElementById('image_stempakket').src+' Stel je eigen stempakket samen op https://mijnstempakket.nl/');
-
-    }
-    
     </script>
     <style>
         @media screen and (max-width: 63.9375em) {
@@ -145,6 +140,9 @@ include('pdata.php');
                   </form>
                   <br /><br /><br /><br />
                 </div>
+                <div>
+                  <a id="anchor_uitslag" href="/uitslag.php" class="button button-large" >Verder</a>
+                </div>
               </div>
             </div>
             <div class="large-4 columns sticky-element">
@@ -152,11 +150,6 @@ include('pdata.php');
                 <div class="sidebar__item sidebar__item--action-block"  class="shareable-class">
                   <h3>Jouw stempakket</h3>
                   <img id="image_stempakket">
-                </div>
-                <div class="social">
-                  <h4>Delen mag, het is gratis:</h4>
-                  <a href="http://www.facebook.com/sharer.php?u=https%3A%2F%2Fmijnstempakket.nl%2F&t=Stel%20je%20eigen%20stempakket%20samen." target="_blank" id="soc_fb"><img src="icon-facebook.png" alt="Deel jouw stempakket op Facebook!" width="64" height="64" /></a>
-                  <a href="https://twitter.com/intent/tweet/?text=Stel%20je%20eigen%20stempakket%20samen%3A%20https%3A%2F%2Fmijnstempakket.nl%2F" target="_blank" id="soc_tw"><img src="icon-twitter.png" alt="Deel jouw stempakket op Twitter!" width="64" height="64" /></a>
                 </div>
               </div>
             </div>
