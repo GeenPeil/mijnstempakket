@@ -18,8 +18,7 @@ $memcache = new Memcache();
 $memcache->connect('localhost', 11211) or die ("Could not connect");
 
 header('Content-type: image/jpeg');
-if($_SERVER['REQUEST_METHOD'] == "GET" && empty($_GET))
-{
+if($_SERVER['REQUEST_METHOD'] == "GET" && empty($_GET)) {
   $rd = imagecreatefromjpeg(IMG_ALT_2);
   imagettftext($rd, FONT_SIZE, 0, THEME_START_X, PARTY_O_START_Y, $cBl, $ftB, $p);
   imagejpeg($rd);
@@ -30,11 +29,11 @@ if($_SERVER['REQUEST_METHOD'] == "GET" && empty($_GET))
 include('pdata.php');
 $ip = array();
 
-$image_key = md5(key($_GET));
+$image_key = md5(http_build_query(ksort($_GET)));
 if (count($_GET) == 1) {
-  $cache = $memcache->get($image_key);
-  if ($cache) {
-    $image = ImageCreateFromString(base64_decode($cache));
+  $cachedImage = $memcache->get($image_key);
+  if ($cachedImage) {
+    $image = ImageCreateFromString(base64_decode($cachedImage));
     ImageJpeg($image);
     exit();
   }
@@ -127,7 +126,6 @@ foreach($ip as $theme => $party)
  $n++;
 }
 
-header('Content-type: image/jpeg');
 ob_start();
 imagejpeg($rd);
 $image = ob_get_clean();

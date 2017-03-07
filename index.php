@@ -65,7 +65,7 @@ include('pdata.php');
         document.getElementById('select_keuze_overig').value >= 0
       ) {
         document.getElementById('sidebar_stempakket').style.display = "inline";
-        document.getElementById('image_stempakket').src = "render.php?"+$('#form_keuzes').serialize();
+        document.getElementById('image_stempakket').src = "stempakket.jpg?"+$('#form_keuzes').serialize();
         gen_social_buttons();
       }
     }
