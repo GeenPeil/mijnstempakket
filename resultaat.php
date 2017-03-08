@@ -80,15 +80,21 @@ foreach($partijRegels as $key => $value) {
             </div>
             <div class="large-4 columns" style="margin-top: 40px;">
               <?php if($_GET['created']=='yes'): ?>
-                <div class="social">
+                <div >
                   <h4>Jouw Stempakket</h4>
-                  <p>Zo. Voelt dat even goed. Je kunt nu de beste standpunten uit alle partijprogramma's kiezen. Zo creëer je als het ware je eigen, ideale partij. En het mooie eraan is: je kunt deze keuze op elk moment wijzigen. Je zit dus niet langer 4 jaar lang vast aan de stem die je uitbrengt op 15 maart.
-                    Klinkt goed toch? Dat is het ook. <a href="https://geenpeil.nl/faq/" target="_blank" >Lees hier hoe het werkt.</a></p>
+                  <p>
+                    Zo. Voelt dat even goed. Je kunt nu de beste standpunten uit alle partijprogramma's kiezen. 
+                    Zo creëer je als het ware je eigen, ideale partij. En het mooie eraan is: je kunt deze keuze op elk moment wijzigen. 
+                    Je zit dus niet langer 4 jaar lang vast aan de stem die je uitbrengt op 15 maart.
+                    Klinkt goed toch? Dat is het ook. <a href="https://geenpeil.nl/faq/" target="_blank" >Lees hier hoe het werkt.</a>
+                  </p>
+                </div>
+                <div style="margin-top: 15px; " class="social">
                   <h4>Delen mag, het is gratis:</h4>
                   <a href="http://www.facebook.com/sharer.php?u=<?=urlencode("https://mijnstempakket.geenpeil.nl/resultaat.php".$checkedURI)?>&t=Stel%20je%20eigen%20stempakket%20samen." target="_blank" id="soc_fb"><img src="icon-facebook.png" alt="Deel jouw stempakket op Facebook!" width="64" height="64" /></a>
-                  <a href="https://twitter.com/intent/tweet/?url=<?=urlencode("https://mijnstempakket.geenpeil.nl/resultaat.php".$checkedURI)?>&text=Zo%20ziet%20mijn%20stempakket%20eruit." target="_blank" id="soc_tw"><img src="icon-twitter.png" alt="Deel jouw stempakket op Twitter!" width="64" height="64" /></a>
+                  <a style="margin-left: 10px;" href="https://twitter.com/intent/tweet/?url=<?=urlencode("https://mijnstempakket.geenpeil.nl/resultaat.php".$checkedURI)?>&text=Zo%20ziet%20mijn%20stempakket%20eruit." target="_blank" id="soc_tw"><img src="icon-twitter.png" alt="Deel jouw stempakket op Twitter!" width="64" height="64" /></a>
                 </div>
-                <div>
+                <div style="margin-top: 15px; text-align: center;">
                   <a href="/samenstellen.php" class="button" >Opnieuw invullen</a>
                 </div>
               <?php else: ?>
