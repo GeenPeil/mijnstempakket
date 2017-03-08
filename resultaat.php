@@ -83,7 +83,7 @@ foreach($partijRegels as $key => $value) {
                 <div class="social">
                   <div style="text-align: center;" >
                     <a href="http://www.facebook.com/sharer.php?u=<?=urlencode("https://mijnstempakket.geenpeil.nl/resultaat.php".$checkedURI)?>&t=Stel%20je%20eigen%20stempakket%20samen." target="_blank" id="soc_fb"><img src="icon-facebook.png" alt="Deel jouw stempakket op Facebook!" width="64" height="64" /></a>
-                    <a style="margin-left: 10px;" href="https://twitter.com/intent/tweet/?hashtags=geenpeil&url=<?=urlencode("https://mijnstempakket.geenpeil.nl/resultaat.php".$checkedURI)?>&text=Zo%20ziet%20mijn%20stempakket%20eruit." target="_blank" id="soc_tw"><img src="icon-twitter.png" alt="Deel jouw stempakket op Twitter!" width="64" height="64" /></a>
+                    <a style="margin-left: 10px;" href="https://twitter.com/intent/tweet/?hashtags=GeenPeil&url=<?=urlencode("https://mijnstempakket.geenpeil.nl/resultaat.php".$checkedURI)?>&text=Zo%20ziet%20mijn%20stempakket%20eruit." target="_blank" id="soc_tw"><img src="icon-twitter.png" alt="Deel jouw stempakket op Twitter!" width="64" height="64" /></a>
                   </div>
                 </div>
                 <div style="margin-top: 15px;"  >
@@ -101,7 +101,7 @@ foreach($partijRegels as $key => $value) {
                   <h4>Delen mag, het is gratis:</h4>
                   <div style="text-align: center;" >
                     <a href="http://www.facebook.com/sharer.php?u=<?=urlencode("https://mijnstempakket.geenpeil.nl/resultaat.php".$checkedURI)?>&t=Stel%20je%20eigen%20stempakket%20samen." target="_blank" id="soc_fb"><img src="icon-facebook.png" alt="Deel jouw stempakket op Facebook!" width="64" height="64" /></a>
-                    <a style="margin-left: 10px;" href="https://twitter.com/intent/tweet/?hashtags=geenpeil&url=<?=urlencode("https://mijnstempakket.geenpeil.nl/resultaat.php".$checkedURI)?>&text=Zo%20ziet%20mijn%20stempakket%20eruit." target="_blank" id="soc_tw"><img src="icon-twitter.png" alt="Deel jouw stempakket op Twitter!" width="64" height="64" /></a>
+                    <a style="margin-left: 10px;" href="https://twitter.com/intent/tweet/?hashtags=GeenPeil&url=<?=urlencode("https://mijnstempakket.geenpeil.nl/resultaat.php".$checkedURI)?>&text=Zo%20ziet%20mijn%20stempakket%20eruit." target="_blank" id="soc_tw"><img src="icon-twitter.png" alt="Deel jouw stempakket op Twitter!" width="64" height="64" /></a>
                   </div>
                 </div>
                 <div style="margin-top: 15px; text-align: center;">
