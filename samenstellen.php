@@ -3,6 +3,9 @@ include('common.php');
 ?>
 <html>
   <head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+		<link rel="shortcut icon" href="//v.fastcdn.co/u/2e79a416/13903153-0-Geenpeil-ring-geente.png" type="image/ico">
     <title>Stemmen delegeren</title>
     <link rel='stylesheet' id='mmenu-css'  href='https://geenpeil.nl/wp-content/themes/geenpeil/assets/components/jQuery.mmenu/dist/css/jquery.mmenu.css?ver=4.7.2' type='text/css' media='all' />
     <link rel='stylesheet' id='mmenu.positioning-css'  href='https://geenpeil.nl/wp-content/themes/geenpeil/assets/components/jQuery.mmenu/dist/extensions/positioning/jquery.mmenu.positioning.css?ver=4.7.2' type='text/css' media='all' />
@@ -13,30 +16,30 @@ include('common.php');
     var aantalCombinaties = 0;
     
     var voteLine = [
-      '<td style="min-width:150px;">',
-        '<select name="thema_{{ID}}" id="select_thema_{{ID}}" onChange="keuzeCombinatieUpdate({{ID}});">',
-          '<option value="-1">- kies een thema -</option>',
-          '<?php foreach($themes as $themeID => $theme) echo "<option value=\"".$themeID."\">".$theme."</option>";?>',
-        '</select>',
-      '</td>',
-      '<td style="width:20px;"></td>',
-      '<td>',
-        '<select name="keuze_{{ID}}" id="select_keuze_{{ID}}" onChange="keuzeCombinatieUpdate({{ID}});">',
-          '<option value="-1">- maak een keuze -</option>',
-          '<option value="0">Ik stem zelf</option>',
-          '<?php foreach($parties as $partyID => $party) echo "  <option value=\"".$partyID."\">Meestemmen met ".$party."</option>"; ?>',
-        '</select>',
-      '</td>'].join('\n');
+      '<div class="row">',
+        '<div class="small-12 medium-6 columns" >',
+          '<select name="thema_{{ID}}" id="select_thema_{{ID}}" onChange="keuzeCombinatieUpdate({{ID}});">',
+            '<option value="-1">- kies een thema -</option>',
+            '<?php foreach($themes as $themeID => $theme) echo "<option value=\"".$themeID."\">".$theme."</option>";?>',
+          '</select>',
+        '</div>',
+        '<div class="small-12 medium-6 columns" >',
+          '<select name="keuze_{{ID}}" id="select_keuze_{{ID}}" onChange="keuzeCombinatieUpdate({{ID}});">',
+            '<option value="-1">- maak een keuze -</option>',
+            '<option value="0">Ik stem zelf</option>',
+            '<?php foreach($parties as $partyID => $party) echo "  <option value=\"".$partyID."\">Meestemmen met ".$party."</option>"; ?>',
+          '</select>',
+        '</div>',
+        '<div class="show-for-small-only" >&nbsp;</div>',
+      '</div>'].join('\n');
 
     function loadForm() {
-      document.getElementById('table_keuze_combinaties').deleteRow(0);
+      document.getElementById('table_keuze_combinaties').innerHTML = '';
       addKeuzeCombinatie(0);
-      document.getElementById('keuze_overig').style.display = "inline";
     }
     
     function addKeuzeCombinatie(id) {
-      row = document.getElementById('table_keuze_combinaties').insertRow();
-      row.innerHTML = voteLine.replace(/\{\{ID\}\}/g, id);
+      $('#table_keuze_combinaties').append(voteLine.replace(/\{\{ID\}\}/g, id));
     }
 
     function keuzeCombinatieUpdate(combiatieID) {
@@ -84,10 +87,12 @@ include('common.php');
     }
 
     </script>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
     <style>
         @media screen and (max-width: 63.9375em) {
-          .header { top: 0px; }
+          .header {
+            top: 0px;
+            position: static;
+          }
         }
         
         .header { background-color: #003399; }
@@ -99,14 +104,14 @@ include('common.php');
     <meta property="og:title" content="<?=$ogTitle?>" />
     <meta property="og:type" content="article" />
     <meta property="og:url" content="https://mijnstempakket.geenpeil.nl/samenstellen.php" />
-    <!-- <meta property="og:image" content="https://mijnstempakket.geenpeil.nl/stempakket.jpg<?=$checkedURI?>" /> TODO -->
+    <!-- <meta name="og:image" content="<?=$ogImage?>"> TODO -->
     <meta property="og:description" content="<?=$ogDescription?>" />
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@GeenPeil">
     <meta name="twitter:creator" content="@GeenPeil">
     <meta name="twitter:title" content="<?=$ogTitle?>">
     <meta name="twitter:description" content="<?=$ogDescription?>">
-    <!-- <meta name="twitter:image" content="ttps://mijnstempakket.geenpeil.nl/stempakket.jpg<?=$checkedURI?>"> TODO -->
+    <!-- <meta name="twitter:image" content="<?=$ogImage?>"> TODO -->
   </head>
   <body class="page-template-default page page-id-23" onLoad="loadForm();">
     <div class="navigation navigation--mobile">
@@ -118,7 +123,7 @@ include('common.php');
       <header class="header header--page">
         <div class="row">
           <a href="https://geenpeil.nl">
-              <img src="https://geenpeil.nl/wp-content/themes/geenpeil/assets/images/geenpeil.png" alt="GeenPeil" class="logo">
+            <img src="https://geenpeil.nl/wp-content/themes/geenpeil/assets/images/geenpeil.png" alt="GeenPeil" class="logo">
           </a>                             
         </div>
       </header>
@@ -134,10 +139,12 @@ include('common.php');
                     <label for="checkbox_zelf_alles_kiezen" >Ik wil op alle onderwerpen zelf stemmen</label>
                   </p>
                   <form id="form_keuzes" action="stempakket.jpg" method="POST">
-                    <table id="table_keuze_combinaties"><tr><td><p>Formulier laden...</p></td></tr></table>
-                    <div style="display:none;" id="keuze_overig">
+                    <div id="table_keuze_combinaties">
+                      <p>Formulier laden...</p>
+                    </div>
+                    <div id="keuze_overig">
                       <p><i>en voor alle andere thema's </i></p>
-                      <select name="keuze_overig" id="select_keuze_overig" onChange="keuzeOverigeUpdate();" style="width:35%;height:40px;">
+                      <select name="keuze_overig" id="select_keuze_overig" onChange="keuzeOverigeUpdate();" style="width:300px;height:40px;">
                         <option value="-1">- maak een keuze -</option>
                         <option value="0">Ik stem zelf</option>
                         <?php
@@ -157,7 +164,7 @@ include('common.php');
               </div>
             </div>
             <div class="large-4 columns sticky-element">
-                Heb je een vraag over Mijn Stempakket? Kijk of je vraag tussen de <a href="https://geenpeil.nl/faq/" target="_blank" >veelgestelde vragen</a> staat.
+              Heb je een vraag over Mijn Stempakket? Kijk of je vraag tussen de <a href="https://geenpeil.nl/faq/" target="_blank" >veelgestelde vragen</a> staat.
               <!-- <div class="sidebar" id="sidebar_stempakket" style="display:none;">
                 <div class="sidebar__item sidebar__item--action-block"  class="shareable-class">
                   <h3>Jouw stempakket</h3>

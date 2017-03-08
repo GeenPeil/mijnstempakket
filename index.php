@@ -1,23 +1,33 @@
+<?php
+include('common.php');
+?>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta name="robots" content="noindex, nofollow" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<link rel="shortcut icon" href="//v.fastcdn.co/u/2e79a416/13903153-0-Geenpeil-ring-geente.png" type="image/ico">
+    	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
 
-		<title>Copy Tool-intro</title>
+		<title><?=$ogTitle?></title>
 
-		<meta name="description" content="" />
+		<meta name="description" content="<?=$ogDescription?>" />
 		<meta name="keywords" content="" />
 
-
-		<meta property="og:locale" content="en_US" />
+		<meta property="og:locale" content="nl_NL" />
 		<meta property="og:type" content="article" />
-		<meta property="og:title" content="Mijn stempakket" />
-		<meta property="og:description" content="Elke politieke partij heeft wel standpunten waar je het grondig mee eens bent. Of juist oneens.Daarom kun je bij GeenPeil na de verkiezingen je eigen persoonlijke pakket van politieke standpunten samenstellen. Zo maak je eigenlijk de ideale partij voor jou.En vind je jezelf een expert op een aantal thema's,&nbsp;dan kun je ook gewoon zelf stemmen.Probeer het zelf!"
-		/>
-		<meta property="og:site_name" content="Mijn stempakket" />
+		<meta property="og:title" content="<?=$ogTitle?>" />
+		<meta property="og:description" content="<?=$ogDescription?>" />
+		<meta property="og:site_name" content="<?=$ogTitle?>" />
 		<meta property="og:url" content="https://mijnstempakket.geenpeil.nl" />
+	    <!-- <meta name="og:image" content="<?=$ogImage?>"> TODO -->
+	    <meta name="twitter:card" content="summary_large_image">
+	    <meta name="twitter:site" content="@GeenPeil">
+	    <meta name="twitter:creator" content="@GeenPeil">
+	    <meta name="twitter:title" content="<?=$ogTitle?>">
+	    <meta name="twitter:description" content="<?=$ogDescription?>">
+	    <!-- <meta name="twitter:image" content="<?=$ogImage?>"> TODO -->
 
 
 		<meta property="og:image" content="http://v.fastcdn.co/u/2e79a416/13828663-0-Geenpeil-2.png" />
