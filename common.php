@@ -53,7 +53,7 @@ define('THEME_START_X', 113);
 define('PARTY_START_X', 638);
 define('PARTY_O_START_Y', 635);
 define('FONT_SIZE', 29);
-define('MAX_LINES', 6);
+define('MAX_LINES', 8);
 define('IMG_HEAD', 'render_head.jpg');
 define('IMG_FOOT_OVERIG_PARTIJ', 'render_foot_overig_partij.jpg');
 define('IMG_FOOT_OVERIG_ZELF', 'render_foot_overig_zelf.jpg');
