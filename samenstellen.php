@@ -168,7 +168,9 @@ include('common.php');
               </div>
             </div>
             <div class="large-4 columns sticky-element">
-              Heb je een vraag over Mijn Stempakket? Kijk of je vraag tussen de <a href="https://geenpeil.nl/faq/" target="_blank" >veelgestelde vragen</a> staat.
+              <div style="margin-top: 15px;" >
+                Heb je een vraag over Mijn Stempakket? Kijk of je vraag tussen de <a href="https://geenpeil.nl/faq/" target="_blank" >veelgestelde vragen</a> staat.
+              </div>
               <!-- <div class="sidebar" id="sidebar_stempakket" style="display:none;">
                 <div class="sidebar__item sidebar__item--action-block"  class="shareable-class">
                   <h3>Jouw stempakket</h3>
