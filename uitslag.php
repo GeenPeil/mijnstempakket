@@ -117,6 +117,10 @@ foreach($partijRegels as $key => $value) {
                 </div>
               <?php else: ?>
                 <div>
+                  <p>Wat je hier ziet is een persoonlijk stempakket dat door een voorganger van jou is samengesteld. 
+                    Via GeenPeil heeft deze persoon dus als het ware zijn eigen, ideale partij met stemrecht in de Tweede Kamer gecreëerd.</p>
+                  <p>Klinkt vaag?</p>
+                  <p>Probeer het anders zelf eens en ervaar hoe geniaal dit is.</p>
                   <a href="/" class="button" >Stel je eigen stempakket samen</a>
                 </div>
               <?php endif; ?>
