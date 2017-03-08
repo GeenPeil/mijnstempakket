@@ -1,45 +1,12 @@
 <?php
-include('pdata.php');
+include('common.php');
 
 $memcache = new Memcache();
 $memcache->connect('localhost', 11211) or die ("Could not connect");
 
 header('Content-type: image/jpeg');
 
-$partijRegels = array();
-foreach($_GET as $key => $value) {
-  if (
-    substr($key, 0, 6) != "thema_" || 
-    $value < 0
-  ) {
-    continue;
-  }
-
-  $id = explode("_", $key)[1];
-  if (
-    !is_numeric($id) ||
-    !isset($_GET['keuze_'.$id]) ||
-    !is_numeric($_GET['keuze_'.$id]) || 
-    $_GET['keuze_'.$id] < 0
-  ) {
-    continue;
-  }
-
-  $zelfStemmen = false;
-  if($_GET['keuze_'.$id] == 0) {
-    $zelfStemmen = true;
-  }
-
-  $partijRegels[$themes[$_GET['thema_'.$id]]] = ($zelfStemmen ? TEXT_STEM_ZELF : $parties[$_GET['keuze_'.$id]]);
-}
-
-if(isset($_GET['keuze_overig']) && $_GET['keuze_overig'] != 0) {
-  $partijRegels['overig'] = $parties[$_GET['keuze_overig']];
-}
-
-if($_GET['keuze_overig'] == 0) {
-  $partijRegels['overig'] = 'self';
-}
+$partijRegels = getPartijRegels();
 
 // Show cached image if it exists
 $image_key = md5(http_build_query($partijRegels));

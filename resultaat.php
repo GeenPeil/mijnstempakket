@@ -1,39 +1,7 @@
 <?php
-include('pdata.php');
-$partijRegels = array();
-foreach($_GET as $key => $value) {
-  if (
-    substr($key, 0, 6) != "thema_" || 
-    $value < 0
-  ) {
-    continue;
-  }
+include('common.php');
 
-  $id = explode("_", $key)[1];
-  if (
-    !is_numeric($id) ||
-    !isset($_GET['keuze_'.$id]) ||
-    !is_numeric($_GET['keuze_'.$id]) || 
-    $_GET['keuze_'.$id] < 0
-  ) {
-    continue;
-  }
-  
-  $zelfStemmen = false;
-  if($_GET['keuze_'.$id] == 0) {
-    $zelfStemmen = true;
-  }
-
-  $partijRegels[$themes[$_GET['thema_'.$id]]] = ($zelfStemmen ? TEXT_STEM_ZELF : $parties[$_GET['keuze_'.$id]]);
-}
-
-if(isset($_GET['keuze_overig']) && $_GET['keuze_overig'] != 0) {
-  $partijRegels['overig'] = $parties[$_GET['keuze_overig']];
-}
-
-if($_GET['keuze_overig'] == 0) {
-  $partijRegels['overig'] = 'self';
-}
+$partijRegels = getPartijRegels();
 
 $partiesReverse = array_flip($parties);
 $themesReverse = array_flip($themes);
@@ -61,25 +29,25 @@ foreach($partijRegels as $key => $value) {
     <link rel='stylesheet' id='slick-carousel-css-css'  href='https://geenpeil.nl/wp-content/themes/geenpeil/assets/components/slick-carousel/slick/slick.css?ver=4.7.2' type='text/css' media='all' />
     <link rel='stylesheet' id='stylesheet-css'  href='https://geenpeil.nl/wp-content/themes/geenpeil/style.css?ver=49' type='text/css' media='' />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
     <style>
         @media screen and (max-width: 63.9375em) {
           .header { top: 0px; }
         }
+
+        .header { background-color: #003399; }
     </style>
-    <?php 
-      $ogDescription = "Elke politieke partij heeft wel standpunten waar je het grondig mee eens bent. Of juist oneens. Daarom kun je bij GeenPeil na de verkiezingen je eigen persoonlijke pakket van politieke standpunten samenstellen. Zo maak je eigenlijk de ideale partij voor jou.";
-    ?>
-    <meta property="og:title" content="Mijn Stempakket" />
+    <meta property="og:title" content="<?=$ogTitle?>" />
     <meta property="og:type" content="article" />
-    <meta property="og:url" content="https://mijnstempakket.geenpeil.nl/uitslag.php<?=$checkedURI?>" />
+    <meta property="og:url" content="https://mijnstempakket.geenpeil.nl/resultaat.php<?=$checkedURI?>" />
     <meta property="og:image" content="https://mijnstempakket.geenpeil.nl/stempakket.jpg<?=$checkedURI?>" />
     <meta property="og:description" content="<?=$ogDescription?>" />
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@GeenPeil">
     <meta name="twitter:creator" content="@GeenPeil">
-    <meta name="twitter:title" content="Mijn Stempakket">
+    <meta name="twitter:title" content="<?=$ogTitle?>">
     <meta name="twitter:description" content="<?=$ogDescription?>">
-    <meta name="twitter:image" content="ttps://mijnstempakket.geenpeil.nl/stempakket.jpg<?=$checkedURI?>">
+    <meta name="twitter:image" content="https://mijnstempakket.geenpeil.nl/stempakket.jpg<?=$checkedURI?>">
   </head>
   <body class="page-template-default page page-id-23">
     <div class="navigation navigation--mobile">
@@ -110,10 +78,13 @@ foreach($partijRegels as $key => $value) {
                 <div class="social">
                   <h4>Jouw Stempakket</h4>
                   <p>Zo. Voelt dat even goed. Je kunt nu de beste standpunten uit alle partijprogramma's kiezen. Zo creëer je als het ware je eigen, ideale partij. En het mooie eraan is: je kunt deze keuze op elk moment wijzigen. Je zit dus niet langer 4 jaar lang vast aan de stem die je uitbrengt op 15 maart.
-                    Klinkt goed toch? Dat is het ook. <a href="https://geenpeil.nl/standpunten/" target="_blank" >Lees hier hoe het werkt.</a></p>
+                    Klinkt goed toch? Dat is het ook. <a href="https://geenpeil.nl/faq/" target="_blank" >Lees hier hoe het werkt.</a></p>
                   <h4>Delen mag, het is gratis:</h4>
-                  <a href="http://www.facebook.com/sharer.php?u=<?=urlencode("https://mijnstempakket.geenpeil.nl/uitslag.php".$checkedURI)?>&t=Stel%20je%20eigen%20stempakket%20samen." target="_blank" id="soc_fb"><img src="icon-facebook.png" alt="Deel jouw stempakket op Facebook!" width="64" height="64" /></a>
-                  <a href="https://twitter.com/intent/tweet/?url=<?=urlencode("https://mijnstempakket.geenpeil.nl/uitslag.php".$checkedURI)?>&text=Zo%20ziet%20mijn%20stempakket%20eruit." target="_blank" id="soc_tw"><img src="icon-twitter.png" alt="Deel jouw stempakket op Twitter!" width="64" height="64" /></a>
+                  <a href="http://www.facebook.com/sharer.php?u=<?=urlencode("https://mijnstempakket.geenpeil.nl/resultaat.php".$checkedURI)?>&t=Stel%20je%20eigen%20stempakket%20samen." target="_blank" id="soc_fb"><img src="icon-facebook.png" alt="Deel jouw stempakket op Facebook!" width="64" height="64" /></a>
+                  <a href="https://twitter.com/intent/tweet/?url=<?=urlencode("https://mijnstempakket.geenpeil.nl/resultaat.php".$checkedURI)?>&text=Zo%20ziet%20mijn%20stempakket%20eruit." target="_blank" id="soc_tw"><img src="icon-twitter.png" alt="Deel jouw stempakket op Twitter!" width="64" height="64" /></a>
+                </div>
+                <div>
+                  <a href="/samenstellen.php" class="button" >Opnieuw invullen</a>
                 </div>
               <?php else: ?>
                 <div>

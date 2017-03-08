@@ -67,4 +67,49 @@ define('TEXT_STEM_ZELF', 'Ik stem zelf');
 $font_light = dirname(__FILE__) . '/helvetica.ttf';
 $font_bold = dirname(__FILE__). '/helvetica-bold.ttf';
 
+$ogTitle = "Mijn Stempakket";
+$ogDescription = "Elke politieke partij heeft wel standpunten waar je het grondig mee eens bent. Of juist oneens. Daarom kun je bij GeenPeil na de verkiezingen je eigen persoonlijke pakket van politieke standpunten samenstellen. Zo maak je eigenlijk de ideale partij voor jou.";
+
+function getPartijRegels() {
+  global $parties;
+  global $themes;
+  
+  $partijRegels = array();
+  foreach($_GET as $key => $value) {
+    if (
+      substr($key, 0, 6) != "thema_" || 
+      $value < 0
+    ) {
+      continue;
+    }
+  
+    $id = explode("_", $key)[1];
+    if (
+      !is_numeric($id) ||
+      !isset($_GET['keuze_'.$id]) ||
+      !is_numeric($_GET['keuze_'.$id]) || 
+      $_GET['keuze_'.$id] < 0
+    ) {
+      continue;
+    }
+  
+    $zelfStemmen = false;
+    if($_GET['keuze_'.$id] == 0) {
+      $zelfStemmen = true;
+    }
+  
+    $partijRegels[$themes[$_GET['thema_'.$id]]] = ($zelfStemmen ? TEXT_STEM_ZELF : $parties[$_GET['keuze_'.$id]]);
+  }
+  
+  if(isset($_GET['keuze_overig']) && $_GET['keuze_overig'] != 0) {
+    $partijRegels['overig'] = $parties[$_GET['keuze_overig']];
+  }
+  
+  if($_GET['keuze_overig'] == 0) {
+    $partijRegels['overig'] = 'self';
+  }
+  
+  return $partijRegels;
+}
+
 ?>
