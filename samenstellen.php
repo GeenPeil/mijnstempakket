@@ -53,7 +53,7 @@ include('common.php');
         return;
       }
 
-      if (document.getElementById('select_keuze_'+aantalCombinaties).value > 0 && document.getElementById('select_thema_'+aantalCombinaties).value >= 0) {
+      if (document.getElementById('select_keuze_'+aantalCombinaties).value >= 0 && document.getElementById('select_thema_'+aantalCombinaties).value >= 0) {
         aantalCombinaties += 1;
         addKeuzeCombinatie(aantalCombinaties);
       }
@@ -65,8 +65,9 @@ include('common.php');
 
     function updateImage() {
       if (
-        (document.getElementById('select_keuze_0').value > 0 && document.getElementById('select_thema_0').value >= 0) ||
-        document.getElementById('select_keuze_overig').value >= 0
+        (document.getElementById('select_keuze_0').value >= 0 && document.getElementById('select_thema_0').value >= 0) ||
+        document.getElementById('select_keuze_overig').value >= 0 ||
+        document.getElementById('checkbox_zelf_alles_kiezen').checked
       ) {
         // document.getElementById('sidebar_stempakket').style.display = "inline";
         // document.getElementById('image_stempakket').src = "stempakket.jpg?"+$('#form_keuzes').serialize();
@@ -78,12 +79,12 @@ include('common.php');
     function zelfKiezenUpdate() {
       if(document.getElementById('checkbox_zelf_alles_kiezen').checked) {
         document.getElementById('form_keuzes').style.display = "none";
-        document.getElementById('sidebar_stempakket').style.display = "inline";
-        document.getElementById('image_stempakket').src = "stempakket.jpg";
+        // document.getElementById('sidebar_stempakket').style.display = "inline";
+        // document.getElementById('image_stempakket').src = "stempakket.jpg";
+        updateImage();
       } else {
         document.getElementById('form_keuzes').style.display = "inline";
         document.getElementById('sidebar_stempakket').style.display = "none";
-        ln(0);
       }
     }
 
@@ -136,8 +137,10 @@ include('common.php');
                 <div class="page__content">
                    <h3>Mijn politiek pakket</h3><br />
                   <p style="text-align: left; line-height: 140%; font-size: medium;">
-                    <input type="checkbox" id="checkbox_zelf_alles_kiezen" onChange="zelfKiezenUpdate();">
-                    <label for="checkbox_zelf_alles_kiezen" >Ik wil op alle onderwerpen zelf stemmen</label>
+                    <label for="checkbox_zelf_alles_kiezen" >
+                      <input type="checkbox" id="checkbox_zelf_alles_kiezen" onChange="zelfKiezenUpdate();">
+                      Ik wil op alle onderwerpen zelf stemmen
+                    </label>
                   </p>
                   <form id="form_keuzes" action="stempakket.jpg" method="POST">
                     <div id="table_keuze_combinaties">
