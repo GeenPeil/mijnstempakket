@@ -1,4 +1,7 @@
 <?php
+header('Location: https://geenpeil.nl/mijnstempakket');
+die();
+
 include('common.php');
 ?>
 <!DOCTYPE html>
