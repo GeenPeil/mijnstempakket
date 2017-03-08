@@ -26,7 +26,7 @@ include('common.php');
         '<div class="small-12 medium-6 columns" >',
           '<select name="keuze_{{ID}}" id="select_keuze_{{ID}}" onChange="keuzeCombinatieUpdate({{ID}});">',
             '<option value="-1">- maak een keuze -</option>',
-            '<option value="0">Ik stem zelf</option>',
+            '<option value="0">wil ik zelf stemmen</option>',
             '<?php foreach($parties as $partyID => $party) echo "  <option value=\"".$partyID."\">Meestemmen met ".$party."</option>"; ?>',
           '</select>',
         '</div>',
@@ -49,6 +49,7 @@ include('common.php');
         return; // fast path
       }
       if(aantalCombinaties > 6) { // max 7 combinaties?
+        document.getElementById('max_bereikt').style.display = 'inline';
         return;
       }
 
@@ -141,6 +142,9 @@ include('common.php');
                   <form id="form_keuzes" action="stempakket.jpg" method="POST">
                     <div id="table_keuze_combinaties">
                       <p>Formulier laden...</p>
+                    </div>
+                    <div id="max_bereikt" style="display: none;" >
+                        Je kunt bij deze simulatie slechts 8 thema’s selecteren. Maar geen nood: op ons stemplatform (dat na 15 maart wordt gelanceerd) kun je je stem eindeloos verdelen over andere partijen. Daar geldt dus geen maximum.
                     </div>
                     <div id="keuze_overig">
                       <p><i>en voor alle andere thema's </i></p>
