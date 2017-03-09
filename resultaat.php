@@ -106,6 +106,7 @@ foreach($partijRegels as $key => $value) {
                 </div>
                 <div style="margin-top: 15px; text-align: center;">
                   <a href="/samenstellen.php" class="button" >Opnieuw invullen</a>
+                  <a href="https://geenpeil.nl/lid-worden" class="button" >Word lid van GeenPeil</a>
                 </div>
               <?php else: ?>
                 <div>
