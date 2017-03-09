@@ -94,7 +94,7 @@ foreach($partijRegels as $key => $value) {
                     Het mooie is: Je kunt je keuze elk moment wijzigen. Je zit nooit meer vier jaar lang vast aan één partij.
                   </p>
                   <p>
-                    Klinkt goed? Dat is directe democratie ook! <a href="https://geenpeil.nl/faq/" target="_blank" >Lees hier hoe het werkt.</a>
+                    Klinkt goed? Dat is directe democratie ook! <a href="https://geenpeil.nl/faq/" target="_blank" >Lees hier hoe het werkt.</a> Of <a href="https://geenpeil.nl/lid-worden" target="_blank" >word lid</a> van GeenPeil, en doe straks mee in de kamer!
                   </p>
                 </div>
                 <div style="margin-top: 15px; " class="social">
@@ -114,6 +114,7 @@ foreach($partijRegels as $key => $value) {
                   <p>Klinkt vaag?</p>
                   <p>Probeer het anders zelf eens en ervaar hoe geniaal dit is.</p>
                   <a href="/" class="button" >Stel je eigen stempakket samen</a>
+                  <a href="https://geenpeil.nl/lid-worden" class="button" >Word lid van GeenPeil</a>
                 </div>
               <?php endif; ?>
             </div>
